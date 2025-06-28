@@ -1,0 +1,46 @@
+/* navBar */
+
+#sidebar button {
+    border-color: #B8DFE0;
+    color: #B8DFE0;
+}
+
+#sidebar button:hover {
+    background-color: #80CFB7;
+    color: #2C3333;
+}
+
+#toggleSidebar {
+    opacity: 0.6;
+    width: 100%;
+    background-color: #a9aaaa;
+}
+
+#saveChanges {
+    opacity: 0.6;
+    width: 100%;
+    background-color: #a9aaaa;
+}
+
+#saveChanges:hover {
+    opacity: 0.5;
+}
+
+#sidebarToggleContainer button {
+    border: 0px;
+    outline: none;
+}
+
+#sidebarToggleContainer {
+    transition: opacity 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    max-width: 100px;
+}
+
+#sidebar {
+    background-color: #1a2c2c;
+}
