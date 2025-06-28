@@ -13,7 +13,8 @@ import WithSelectInputWrapper from "../utils/withSelectInputWrapper";
 import WithNumberInputWrapper from "../utils/withNumberInputWrapper";
 import { formatCategoryName } from "../utils/formatCategoryName";
 import toast from "react-hot-toast";
-
+// DEBUG
+import datos from "../data/db.json"
 const SingleProduct = () => {
   const [products, setProducts] = useState<Product[]>([]);
   const [singleProduct, setSingleProduct] = useState<Product | null>(null);
@@ -22,6 +23,7 @@ const SingleProduct = () => {
   const [color, setColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
   const params = useParams<{ id: string }>();
+  const [id, setId] = useState(null)
   const dispatch = useAppDispatch();
 
   // defining HOC instances
@@ -29,21 +31,15 @@ const SingleProduct = () => {
   const QuantityInputUpgrade = WithNumberInputWrapper(QuantityInput);
 
   useEffect(() => {
-    const fetchSingleProduct = async () => {
-      const response = await fetch(
-        `http://localhost:3000/products/${params.id}`
-      );
-      const data = await response.json();
-      setSingleProduct(data);
-    };
+    if (!params.id) return; // si no hay id, no hacemos nada
 
-    const fetchProducts = async () => {
-      const response = await fetch("http://localhost:3000/products");
-      const data = await response.json();
-      setProducts(data);
-    };
-    fetchSingleProduct();
-    fetchProducts();
+    const allProducts = datos.products;
+    setProducts(allProducts);
+
+    const id = params.id
+    const productoEncontrado = allProducts.find((prod) => prod.id === id);
+
+    setSingleProduct(productoEncontrado || null);
   }, [params.id]);
 
   const handleAddToCart = () => {
@@ -82,7 +78,7 @@ const SingleProduct = () => {
               <p className="text-base text-secondaryBrown">
                 {formatCategoryName(singleProduct?.category || "")}
               </p>
-              <p className="text-base font-bold">${ singleProduct?.price }</p>
+              <p className="text-base font-bold">${singleProduct?.price}</p>
             </div>
           </div>
           <div className="flex flex-col gap-2">
