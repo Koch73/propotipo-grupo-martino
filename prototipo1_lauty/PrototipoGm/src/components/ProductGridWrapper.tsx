@@ -1,10 +1,11 @@
 import React, { ReactElement, useCallback, useEffect, useState } from "react";
-import customFetch from "../axios/custom";
+import datos from '../data/db.json';
 import { useAppDispatch, useAppSelector } from "../hooks";
 import {
   setShowingProducts,
   setTotalProducts,
 } from "../features/shop/shopSlice";
+
 
 const ProductGridWrapper = ({
   searchQuery,
@@ -20,8 +21,8 @@ const ProductGridWrapper = ({
   page?: number;
   limit?: number;
   children:
-    | ReactElement<{ products: Product[] }>
-    | ReactElement<{ products: Product[] }>[];
+  | ReactElement<{ products: Product[] }>
+  | ReactElement<{ products: Product[] }>[];
 }) => {
   const [products, setProducts] = useState<Product[]>([]);
   const { totalProducts } = useAppSelector((state) => state.shop);
@@ -30,15 +31,11 @@ const ProductGridWrapper = ({
   // Memoize the function to prevent unnecessary re-renders
   // getSearchedProducts will be called only when searchQuery or sortCriteria changes
   const getSearchedProducts = useCallback(
-    async (query: string, sort: string, page: number) => {
-      if (!query || query.length === 0) {
-        query = "";
-      }
-      const response = await customFetch("/products");
-      const allProducts = await response.data;
-      let searchedProducts = allProducts.filter((product: Product) =>
-        product.title.toLowerCase().includes(query.toLowerCase())
-      );
+    async (sort: string, page: number) => {
+
+      const allProducts = datos.products;
+
+      let searchedProducts = allProducts
 
       if (category) {
         searchedProducts = searchedProducts.filter((product: Product) => {
