@@ -7,12 +7,14 @@ const ProductItem = ({
   title,
   category,
   price,
+  stock
 }: {
   id: string;
   image: string;
   title: string;
   category: string;
   price: number;
+  stock: number;
 }) => {
   return (
     <div className="w-[400px] flex flex-col gap-2 justify-center max-md:w-[300px]">
@@ -50,5 +52,6 @@ const ProductItem = ({
       </div>
     </div>
   );
+  stock = stock
 };
 export default ProductItem;

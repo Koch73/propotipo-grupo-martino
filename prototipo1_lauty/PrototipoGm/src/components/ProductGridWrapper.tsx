@@ -52,13 +52,9 @@ const ProductGridWrapper = ({
         searchedProducts = searchedProducts.sort(
           (a: Product, b: Product) => a.price - b.price
         );
-      } else if (sort === "price-desc") {
+      } else {
         searchedProducts = searchedProducts.sort(
           (a: Product, b: Product) => b.price - a.price
-        );
-      } else if (sort === "popularity") {
-        searchedProducts = searchedProducts.sort(
-          (a: Product, b: Product) => b.popularity - a.popularity
         );
       }
       // Limit the number of products to be displayed
@@ -87,7 +83,7 @@ const ProductGridWrapper = ({
   );
 
   useEffect(() => {
-    getSearchedProducts(searchQuery || "", sortCriteria || "", page || 1);
+    getSearchedProducts(sortCriteria || "", page || 1);
   }, [searchQuery, sortCriteria, page]);
 
   // Clone the children and pass the products as props to the children

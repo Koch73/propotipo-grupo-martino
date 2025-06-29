@@ -4,7 +4,6 @@ interface Product {
   image: string;
   category: string;
   price: number;
-  popularity: number;
   stock: number;
 }
 

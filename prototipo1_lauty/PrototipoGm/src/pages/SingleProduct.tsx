@@ -23,7 +23,6 @@ const SingleProduct = () => {
   const [color, setColor] = useState<string>("black");
   const [quantity, setQuantity] = useState<number>(1);
   const params = useParams<{ id: string }>();
-  const [id, setId] = useState(null)
   const dispatch = useAppDispatch();
 
   // defining HOC instances
@@ -54,7 +53,6 @@ const SingleProduct = () => {
           quantity,
           size,
           color,
-          popularity: singleProduct.popularity,
           stock: singleProduct.stock,
         })
       );
@@ -164,7 +162,6 @@ const SingleProduct = () => {
               title={product?.title}
               category={product?.category}
               price={product?.price}
-              popularity={product?.popularity}
               stock={product?.stock}
             />
           ))}
